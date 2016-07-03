@@ -17,9 +17,9 @@ const HEROES: Hero[] = [
 
 @Component({
   selector: 'my-app',
+  directives: [HeroDetailComponent],
   template: `
     <h1>{{title}}</h1>
-
     <h2>My Heroes</h2>
     <ul class="heroes">
       <li *ngFor="let hero of heroes"
@@ -28,9 +28,9 @@ const HEROES: Hero[] = [
         <span class="badge">{{hero.id}}</span> {{hero.name}}
       </li>
     </ul>
-
     <my-hero-detail [hero]="selectedHero"></my-hero-detail>
   `,
+
   styles: [`
   .selected {
     background-color: #CFD8DC !important;
@@ -80,7 +80,6 @@ const HEROES: Hero[] = [
     border-radius: 4px 0 0 4px;
   }
   `],
-  directives: [HeroDetailComponent]
 })
 
 export class AppComponent {
