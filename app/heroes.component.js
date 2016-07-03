@@ -9,24 +9,28 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var router_1 = require('@angular/router');
 var hero_service_1 = require('./hero.service');
-var AppComponent = (function () {
-    function AppComponent() {
-        this.title = 'Tour of Heroes';
+var HeroesComponent = (function () {
+    function HeroesComponent(heroService) {
+        this.heroService = heroService;
     }
-    AppComponent = __decorate([
+    HeroesComponent.prototype.onSelect = function (hero) { this.selectedHero = hero; };
+    HeroesComponent.prototype.getHeroes = function () {
+        var _this = this;
+        this.heroService.getHeroes().then(function (heroes) { return _this.heroes = heroes; });
+    };
+    HeroesComponent.prototype.ngOnInit = function () {
+        this.getHeroes();
+    };
+    HeroesComponent = __decorate([
         core_1.Component({
-            selector: 'my-app',
-            template: "\n    <h1>{{title}}</h1>\n    <nav>\n      <a [routerLink]=\"['/dashboard']\" routerLinkActive=\"active\">Dashboard</a>\n      <a [routerLink]=\"['/heroes']\" routerLinkActive=\"active\">Heroes</a>\n    </nav>\n    <router-outlet></router-outlet>\n  ",
-            directives: [router_1.ROUTER_DIRECTIVES],
-            providers: [
-                hero_service_1.HeroService
-            ]
+            selector: 'my-heroes',
+            templateUrl: 'app/heroes.component.html',
+            styleUrls: ['app/heroes.component.css']
         }), 
-        __metadata('design:paramtypes', [])
-    ], AppComponent);
-    return AppComponent;
+        __metadata('design:paramtypes', [hero_service_1.HeroService])
+    ], HeroesComponent);
+    return HeroesComponent;
 }());
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+exports.HeroesComponent = HeroesComponent;
+//# sourceMappingURL=heroes.component.js.map
